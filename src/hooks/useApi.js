@@ -7,7 +7,7 @@ function useApi(route) {
   if (process.env.NODE_ENV === "production") {
 
   }
-  const url = (process.env.NODE_ENV === "production") ? "https://sensehealth-backend.herokuapp.com/" + route : route;
+  const url = (process.env.NODE_ENV === "production") ? "https://sensehealth-backend.herokuapp.com" + route : route;
   const [result, setResult] = useState(null);
 
   useEffect(() => {
