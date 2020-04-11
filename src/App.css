@@ -1,3 +1,9 @@
+code {
+  background: #ededed;
+  padding: 6px;
+  max-width: 600px;
+}
+
 .App {
   text-align: center;
 }
