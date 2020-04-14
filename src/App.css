@@ -6,6 +6,8 @@ code {
 
 .App {
   text-align: center;
+  background-color: #F7F8FB;
+  font-family: Arial, Helvetica, sans-serif	
 }
 
 .App-logo {
@@ -41,4 +43,81 @@ code {
   to {
     transform: rotate(360deg);
   }
+}
+
+.sidebar {
+  width: 256px;
+  background-color: white;
+  position: fixed;
+  height: 100%;
+  box-shadow: 6px 0px 18px rgba(0, 0, 0, 0.06);
+}
+
+.page {
+  padding-left: 256px;
+  height: 100%;
+}
+
+.logo {
+  margin: 0 auto;
+  width: 84px;
+  height: 84px;
+  background-color: blue;
+  display: block;
+  margin-top: 60px;
+}
+
+.nav {
+  list-style: none;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-top: 58px;
+  font-size: 20px;
+  padding-left: 36px;
+}
+
+.nav li {
+  margin-bottom: 17px;
+  color: #ACAFC8;
+  transition: 0.2s color ease;
+  
+}
+
+.nav li a {
+  text-decoration: none;
+}
+
+.nav-active {
+  text-decoration: none;
+  color: #1F28CF;
+}
+
+.nav li a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav li:hover {
+  color: #1F28CF;
+}
+
+.logo-bot {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  justify-content: center;
+  bottom: 28px;
+  display: block;
+  font-size: 30px;
+  text-transform: uppercase;
+}
+
+.logo-bot-content {
+  display: inline-block;
+  text-align: left;
+}
+
+.logo-bot-content em {
+  font-style: normal;
+  font-weight: 900;
 }

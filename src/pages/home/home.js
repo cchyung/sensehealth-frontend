@@ -1,7 +1,7 @@
 import React from 'react';
 import  { Link } from 'react-router-dom';
 
-import '../App.css';
+import '../../App.css';
 
 function Home() {
   return (
@@ -11,6 +11,8 @@ function Home() {
       <Link to="/gavin">See Gavin Spin</Link>
       <br />
       <Link to="/testApi">Test API</Link>
+
+      <br />
     </div>
   );
 }
