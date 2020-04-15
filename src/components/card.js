@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function Card({ title, children }) {
+function Card({ title, isOrange, children }) {
   return (
     <Wrapper>
-      <Title>{title}</Title>
+      <Title isOrange={isOrange}>{title}</Title>
 
       <Body>
         {children}
@@ -18,10 +18,11 @@ const Wrapper  = styled.div`
   border: 3px solid #EBEFF2;
   border-bottom-width: 16px;
   overflow: hidden;
+  margin-bottom: 24px;
 `;
 
 const Title = styled.div`
-  background: rgba(31,40,207,0.8);
+  background: ${({isOrange}) => isOrange ? '#FD7E56' : '#1F28CF'};
   color: #FFFFFF;
   padding: 16px 0;
   text-align: center;

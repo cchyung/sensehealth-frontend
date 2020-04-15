@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Menu, Main, Container, Card } from '../components';
+import { Menu, Main, Container, Card, Search } from '../components';
 
 function Groups() {
   return (
@@ -8,6 +8,8 @@ function Groups() {
       <Menu />
 
       <Main>
+        <Search type="text" placeholder="Search for groups or members" />
+
         <Container>
           <Card title="Groups">
             <p>This is a generic paragraph.</p>

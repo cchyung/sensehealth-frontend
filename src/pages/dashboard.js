@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Menu, Main, Container, Search, Card } from '../components';
+import { Menu, Main, Container, Search, Card, Row, Column } from '../components';
 
 function Dashboard() {
   return (
@@ -11,13 +11,34 @@ function Dashboard() {
         <Search type="text" placeholder="Search for groups or members" />
 
         <Container>
-          <Card title="This is a title">
-            <p>This is a generic paragraph.</p>
-            <p>This is a generic paragraph.</p>
-            <p>This is a generic paragraph.</p>
-            <p>This is a generic paragraph.</p>
-            <p>This is a generic paragraph.</p>
-          </Card>
+          <Row justify="space-between">
+            <Column width="55%">
+              <Card title="This is a title">
+                <p>This is a generic paragraph.</p>
+                <p>This is a generic paragraph.</p>
+                <p>This is a generic paragraph.</p>
+                <p>This is a generic paragraph.</p>
+                <p>This is a generic paragraph.</p>
+              </Card>
+            </Column>
+
+            <Column width="40%">
+              <Card title="This is a title">
+                <p>This is a generic paragraph.</p>
+                <p>This is a generic paragraph.</p>
+              </Card>
+
+              <Card title="This is a title" isOrange>
+                <p>This is a generic paragraph.</p>
+                <p>This is a generic paragraph.</p>
+              </Card>
+
+              <Card title="This is a title">
+                <p>This is a generic paragraph.</p>
+                <p>This is a generic paragraph.</p>
+              </Card>
+            </Column>
+          </Row>
         </Container>
       </Main>
     </>
