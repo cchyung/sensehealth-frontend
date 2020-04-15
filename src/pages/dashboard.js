@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Menu, Main} from '../components';
+import { Menu, Main, Container, Search, Card } from '../components';
 
 function Dashboard() {
   return (
@@ -8,8 +8,17 @@ function Dashboard() {
       <Menu />
 
       <Main>
-        <h1>Dashboard Page</h1>
-        <p>This is supposed to be the dashboard page</p>
+        <Search type="text" placeholder="Search for groups or members" />
+
+        <Container>
+          <Card title="This is a title">
+            <p>This is a generic paragraph.</p>
+            <p>This is a generic paragraph.</p>
+            <p>This is a generic paragraph.</p>
+            <p>This is a generic paragraph.</p>
+            <p>This is a generic paragraph.</p>
+          </Card>
+        </Container>
       </Main>
     </>
   );

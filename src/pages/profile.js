@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Menu, Main } from '../components';
+import { Menu, Main, Container, Card } from '../components';
 
 function Profile() {
   return (
@@ -8,8 +8,15 @@ function Profile() {
       <Menu />
 
       <Main>
-        <h1>Profile Page</h1>
-        <p>This is supposed to be the profile page</p>
+        <Container>
+          <Card title="Profile">
+            <p>This is a generic paragraph.</p>
+            <p>This is a generic paragraph.</p>
+            <p>This is a generic paragraph.</p>
+            <p>This is a generic paragraph.</p>
+            <p>This is a generic paragraph.</p>
+          </Card>
+        </Container>
       </Main>
     </>
   );

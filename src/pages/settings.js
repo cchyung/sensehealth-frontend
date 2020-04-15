@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Menu, Main } from '../components';
+import { Menu, Main, Container, Card } from '../components';
 
 function Settings() {
   return (
@@ -8,8 +8,15 @@ function Settings() {
       <Menu />
 
       <Main>
-        <h1>Settings Page</h1>
-        <p>This is supposed to be the settings page</p>
+        <Container>
+          <Card title="Settings">
+            <p>This is a generic paragraph.</p>
+            <p>This is a generic paragraph.</p>
+            <p>This is a generic paragraph.</p>
+            <p>This is a generic paragraph.</p>
+            <p>This is a generic paragraph.</p>
+          </Card>
+        </Container>
       </Main>
     </>
   );
