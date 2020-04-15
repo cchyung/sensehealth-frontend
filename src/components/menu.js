@@ -2,17 +2,16 @@ import React from 'react';
 import  { NavLink } from 'react-router-dom';
 
 import '../App.css';
-import './menu.css';
 
 function Menu() {
   return (
     <div className="sidebar">
-        <img className='logo'/>
+        <img className='logo' alt='Harbor Health Logo'/>
         <ul className='nav'>
-            <li><NavLink to='/' activeClassName='nav-active'>Dashboard</NavLink></li>
-            <li>Groups</li>
-            <li>Profile</li>
-            <li>Settings</li>
+            <li><NavLink to='/dashboard' activeClassName='nav-active'>Dashboard</NavLink></li>
+            <li><NavLink to='/groups'>Groups</NavLink></li>
+            <li><NavLink to='/profile'>Profile</NavLink></li>
+            <li><NavLink to='/settings'>Settings</NavLink></li>
         </ul>
         <div className='logo-bot'>
             <p className='logo-bot-content'>

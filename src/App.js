@@ -5,32 +5,37 @@ import {
   Route
 } from 'react-router-dom';
 
-import Home from './pages/home/home';
-import Gavin from './pages/gavin';
-import TestApi from './pages/testApi';
-import Menu from './pages/menu';
+import { Home, Login, Dashboard, Groups, Profile, Settings } from './pages';
 
 function App() {
   return (
     <>
         <Router>
-          <Menu></Menu>
-          <div className='page'>
-            <Switch>
-              <Route exact path="">
-                <Home />
-              </Route>
-              <Route path="/gavin">
-                <Gavin />
-              </Route>
-              <Route path="/testApi">
-                <TestApi />
-              </Route>
-              <Route path="/dash">
-                <TestApi />
-              </Route>
-            </Switch>
-          </div>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+
+            <Route path="/login">
+              <Login />
+            </Route>
+
+            <Route path="/dashboard">
+              <Dashboard />
+            </Route>
+
+            <Route path="/groups">
+              <Groups />
+            </Route>
+
+            <Route path="/profile">
+              <Profile />
+            </Route>
+
+            <Route path="/settings">
+              <Settings />
+            </Route>
+          </Switch>
         </Router>
     </>
   )
