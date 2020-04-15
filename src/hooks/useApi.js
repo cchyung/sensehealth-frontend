@@ -36,8 +36,6 @@ function useApi(route, method, body) {
 
         setLoading(false);
 
-        console.log(request.status);
-
         if (request.status >= 400 && request.status <= 600) {
           setError(request.status);
         } else {
