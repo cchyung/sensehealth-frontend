@@ -1,23 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
-import  { NavLink } from 'react-router-dom';
+import  { NavLink, useLocation } from 'react-router-dom';
 
 import SquareLogoSVG from '../assets/square_logo.svg';
 import TextLogoSVG from '../assets/text_logo.svg';
 
 function Menu() {
-  return (
-    <Sidebar>
-        <SquareLogo src={SquareLogoSVG} alt='Harbor Health Logo'/>
-        <Nav>
-            <NavItem><NavLink to='/dashboard'>Dashboard</NavLink></NavItem>
-            <NavItem><NavLink to='/groups'>Groups</NavLink></NavItem>
-            <NavItem><NavLink to='/profile'>Profile</NavLink></NavItem>
-            <NavItem><NavLink to='/settings'>Settings</NavLink></NavItem>
-        </Nav>
-        <BottomLogo src={TextLogoSVG} alt='Harbor Health' />
-    </Sidebar>
-  );
+    const { pathname } = useLocation();
+
+    return (
+        <Sidebar>
+            <SquareLogo src={SquareLogoSVG} alt='Harbor Health Logo'/>
+            <Nav>
+                <NavItem active={pathname === '/dashboard'}><NavLink to='/dashboard'>Dashboard</NavLink></NavItem>
+                <NavItem active={pathname === '/groups'}><NavLink to='/groups'>Groups</NavLink></NavItem>
+                <NavItem active={pathname === '/profile'}><NavLink to='/profile'>Profile</NavLink></NavItem>
+                <NavItem active={pathname === '/settings'}><NavLink to='/settings'>Settings</NavLink></NavItem>
+            </Nav>
+            <BottomLogo src={TextLogoSVG} alt='Harbor Health' />
+        </Sidebar>
+    );
 }
 
 const Sidebar = styled.div`
@@ -60,7 +62,7 @@ const NavItem = styled.li`
     transition: 0.2s color ease;
 
     a {
-        color: #ACAFC8;
+        color: ${({active}) => active ? '#1F28CF' : '#ACAFC8'};
         text-decoration: none;
 
         &:hover {
