@@ -1,20 +1,16 @@
 import React from 'react';
 
-import { Menu } from '../components';
-
-import '../App.css';
+import { Menu, Main } from '../components';
 
 function Profile() {
   return (
     <>
       <Menu />
 
-      <div className='App'>
-        <div className='page'>
-          <h1>Profile Page</h1>
-          <p>This is supposed to be the profile page</p>
-        </div>
-      </div>
+      <Main>
+        <h1>Profile Page</h1>
+        <p>This is supposed to be the profile page</p>
+      </Main>
     </>
   );
 }

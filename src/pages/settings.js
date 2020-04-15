@@ -1,20 +1,16 @@
 import React from 'react';
 
-import { Menu } from '../components';
-
-import '../App.css';
+import { Menu, Main } from '../components';
 
 function Settings() {
   return (
     <>
       <Menu />
 
-      <div className='App'>
-        <div className='page'>
-          <h1>Settings Page</h1>
-          <p>This is supposed to be the settings page</p>
-        </div>
-      </div>
+      <Main>
+        <h1>Settings Page</h1>
+        <p>This is supposed to be the settings page</p>
+      </Main>
     </>
   );
 }
