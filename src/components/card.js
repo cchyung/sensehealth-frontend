@@ -22,7 +22,7 @@ const Wrapper  = styled.div`
 `;
 
 const Title = styled.div`
-  background: ${({isOrange}) => isOrange ? '#FD7E56' : '#1F28CF'};
+  background: ${({isOrange}) => isOrange ? '#FD7E56' : 'rgba(31, 40, 207, 0.8)'};
   color: #FFFFFF;
   padding: 16px 0;
   text-align: center;
