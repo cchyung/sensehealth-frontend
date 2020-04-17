@@ -1,7 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function PeopleTable() {
+function generateRows(people) {
+  return people.map(person => (
+    <PeopleRow>
+      <PeopleRowCell alert={person.temperature > 100 || person.avgHeartRate > 100 || person.oxygen <= 92}><Name>{person.name}</Name></PeopleRowCell>
+      <PeopleRowCell>{person.role}</PeopleRowCell>
+      <PeopleRowCell alert={person.temperature > 100}><Number>{person.temperature}</Number> degrees</PeopleRowCell>
+      <PeopleRowCell alert={person.avgHeartRate > 100}><Number>{person.avgHeartRate}</Number> bpm</PeopleRowCell>
+      <PeopleRowCell alert={person.oxygen <= 92}><Number>{person.oxygen}</Number> percent</PeopleRowCell>
+    </PeopleRow>
+  ))
+}
+
+function PeopleTable({ people }) {
+    const PeopleRows = generateRows(people)
     return (
         <Table>
           <TableHeaderRow>
@@ -12,77 +25,7 @@ function PeopleTable() {
             <th width="18.75%">Oxygen</th>
           </TableHeaderRow>
           
-          <PeopleRow>
-            <td><Name>Peter Parker</Name></td>
-            <td>Nurse</td>
-            <td><Number>98.9</Number> degrees</td>
-            <td><Number>90</Number> bpm</td>
-            <td><Number>95</Number> percent</td>
-          </PeopleRow>
-
-          <PeopleRow>
-            <td><Name>Peter Parker</Name></td>
-            <td>Nurse</td>
-            <td><Number>98.9</Number> degrees</td>
-            <td><Number>90</Number> bpm</td>
-            <td><Number>95</Number> percent</td>
-          </PeopleRow>
-
-          <PeopleRow>
-            <td><Name>Peter Parker</Name></td>
-            <td>Nurse</td>
-            <td><Number>98.9</Number> degrees</td>
-            <td><Number>90</Number> bpm</td>
-            <td><Number>95</Number> percent</td>
-          </PeopleRow>
-
-          <PeopleRow>
-            <td><Name>Peter Parker</Name></td>
-            <td>Nurse</td>
-            <td><Number>98.9</Number> degrees</td>
-            <td><Number>90</Number> bpm</td>
-            <td><Number>95</Number> percent</td>
-          </PeopleRow>
-
-          <PeopleRow>
-            <td><Name>Peter Parker</Name></td>
-            <td>Nurse</td>
-            <td><Number>98.9</Number> degrees</td>
-            <td><Number>90</Number> bpm</td>
-            <td><Number>95</Number> percent</td>
-          </PeopleRow>
-          
-          <PeopleRow>
-            <td><Name>Peter Parker</Name></td>
-            <td>Nurse</td>
-            <td><Number>98.9</Number> degrees</td>
-            <td><Number>90</Number> bpm</td>
-            <td><Number>95</Number> percent</td>
-          </PeopleRow>
-
-          <PeopleRow>
-            <td><Name>Peter Parker</Name></td>
-            <td>Nurse</td>
-            <td><Number>98.9</Number> degrees</td>
-            <td><Number>90</Number> bpm</td>
-            <td><Number>95</Number> percent</td>
-          </PeopleRow>
-
-          <PeopleRow>
-            <td><Name>Peter Parker</Name></td>
-            <td>Nurse</td>
-            <td><Number>98.9</Number> degrees</td>
-            <td><Number>90</Number> bpm</td>
-            <td><Number>95</Number> percent</td>
-          </PeopleRow>
-
-          <PeopleRow>
-            <td><Name>Peter Parker</Name></td>
-            <td>Nurse</td>
-            <td><Number>98.9</Number> degrees</td>
-            <td><Number>90</Number> bpm</td>
-            <td><Number>95</Number> percent</td>
-          </PeopleRow>
+          {PeopleRows}
         </Table>
     );
 }
@@ -111,7 +54,6 @@ const TableHeaderRow = styled.tr`
 const PeopleRow = styled.tr`
   td {
     padding: 16px;
-    color: #6A707E;
     background: #FFFFFF;
     border-bottom: 3px solid #EBEFF2;
   }
@@ -121,6 +63,11 @@ const PeopleRow = styled.tr`
       border-bottom: 16px solid #EBEFF2;
     }
   }
+`;
+
+const PeopleRowCell = styled.td`
+  color: #6A707E;
+  ${({alert}) => alert && 'color: #FF103B;'}
 `;
 
 const Name = styled.span`
