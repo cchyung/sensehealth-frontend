@@ -2,15 +2,31 @@ import React from 'react';
 import styled from 'styled-components';
 
 function generateRows(people) {
-  return people.map(person => (
-    <PeopleRow>
-      <PeopleRowCell alert={person.temperature > 100 || person.avgHeartRate > 100 || person.oxygen <= 92}><Name>{person.name}</Name></PeopleRowCell>
-      <PeopleRowCell>{person.role}</PeopleRowCell>
-      <PeopleRowCell alert={person.temperature > 100}><Number>{person.temperature}</Number> degrees</PeopleRowCell>
-      <PeopleRowCell alert={person.avgHeartRate > 100}><Number>{person.avgHeartRate}</Number> bpm</PeopleRowCell>
-      <PeopleRowCell alert={person.oxygen <= 92}><Number>{person.oxygen}</Number> percent</PeopleRowCell>
-    </PeopleRow>
-  ))
+  return people.map(person => {
+    const alert = person.temperature > 100 || person.avgHeartRate > 100 || person.oxygen <= 92;
+
+    return (
+      <PeopleRow>
+        <PeopleRowCell alert={alert}>
+          <VertIndicator alert={alert} />
+          <Name>{person.name}</Name>
+        </PeopleRowCell>
+        <PeopleRowCell>{person.role}</PeopleRowCell>
+        <PeopleRowCell alert={person.temperature > 100}>
+          <Number>{person.temperature}</Number> degrees
+          <HorzIndicator alert={alert} />
+        </PeopleRowCell>
+        <PeopleRowCell alert={person.avgHeartRate > 100}>
+          <Number>{person.avgHeartRate}</Number> bpm
+          <HorzIndicator alert={alert} />
+        </PeopleRowCell>
+        <PeopleRowCell alert={person.oxygen <= 92}>
+          <Number>{person.oxygen}</Number> percent
+          <HorzIndicator alert={alert} />
+        </PeopleRowCell>
+      </PeopleRow>
+    );
+  });
 }
 
 function PeopleTable({ people }) {
@@ -66,6 +82,7 @@ const PeopleRow = styled.tr`
 `;
 
 const PeopleRowCell = styled.td`
+  position: relative;
   color: #6A707E;
   ${({alert}) => alert && 'color: #FF103B;'}
 `;
@@ -76,6 +93,29 @@ const Name = styled.span`
 
 const Number = styled.span`
   font-weight: 700;
+`;
+
+const VertIndicator = styled.div`
+  background-color: ${({alert}) => alert ? '#FF103B;' : '#7CE46B;'}
+  width: 5px;
+  height: 80%;
+  display; block;
+  position: absolute;
+  left: 0;
+  top: 10%;
+  border-radius: 0 4px 4px 0;
+`;
+
+const HorzIndicator = styled.div`
+  background-color: #FF103B;
+  display: ${({alert}) => alert ? 'block;' : 'none;'}
+  width: 15%;
+  height: 5px;
+  position: absolute;
+  left: 16px;
+  bottom: 0;
+  border-radius: 4px 4px 0 0;
+  z-index: 5;
 `;
 
 export default PeopleTable;
