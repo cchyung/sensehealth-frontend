@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Menu, Main, Container, Search, Card, Row, Column, TriCol } from '../components';
+import { Menu, Main, Container, Search, Card, Row, Column, TriCol, TeamFeelingChart, HealthOutliers, YourGroups } from '../components';
 
 function Dashboard() {
   return (
@@ -12,37 +12,22 @@ function Dashboard() {
 
         <Container>
           <Row justify="space-between">
-            <Column width="55%">
-              <Card title="Data Dashboard">
-                <img src="https://datavizproject.com/wp-content/uploads/2015/10/1-Line-Chart.png" alt="Line chart" />
+            <Column width="60%">
+              <Card title="Your Groups">
+                <YourGroups />
+              </Card>
+
+              <Card title="How Your Team is Feeling">
+                <TeamFeelingChart />
               </Card>
             </Column>
 
-            <Column width="40%">
-              <Card title="Checked In Group Members">
+            <Column width="38%">
+              <Card title="Staff Health Risks" isPink>
                 <TriCol
                   data={[
                     {
-                      value: 37,
-                      label: 'Today'
-                    },
-                    {
-                      value: 47,
-                      label: 'Yesterday'
-                    },
-                    {
-                      value: 117,
-                      label: 'Last 7 Days'
-                    }
-                  ]}
-                />
-              </Card>
-
-              <Card title="Staff Health Risks" isOrange>
-                <TriCol
-                  data={[
-                    {
-                      value: 10,
+                      value: 9,
                       label: 'Today'
                     },
                     {
@@ -54,12 +39,13 @@ function Dashboard() {
                       label: 'Last 7 Days'
                     }
                   ]}
+
+                  isPink
                 />
               </Card>
 
-              <Card title="This is a title">
-                <p>This is a generic paragraph.</p>
-                <p>This is a generic paragraph.</p>
+              <Card title="Health Outliers" isPink>
+                <HealthOutliers />
               </Card>
             </Column>
           </Row>

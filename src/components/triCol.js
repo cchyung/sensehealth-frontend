@@ -3,20 +3,20 @@ import styled from 'styled-components';
 
 import { Row, Column } from "./grid";
 
-function TriCol({ data }) {
+function TriCol({ data, isPink }) {
   return (
     <Row justify="space-between">
-      <DataColumn width="33%">
+      <DataColumn width="33%" isPink={isPink}>
         <Data>{data[0].value}</Data>
         <DataLabel>{data[0].label}</DataLabel>
       </DataColumn>
 
-      <DataColumn width="33%">
+      <DataColumn width="33%" isPink={isPink}>
         <Data>{data[1].value}</Data>
         <DataLabel>{data[1].label}</DataLabel>
       </DataColumn>
 
-      <DataColumn width="33%">
+      <DataColumn width="33%" isPink={isPink}>
         <Data>{data[2].value}</Data>
         <DataLabel>{data[2].label}</DataLabel>
       </DataColumn>
@@ -27,7 +27,7 @@ function TriCol({ data }) {
 const DataColumn = styled(Column)`
   text-align: center;
   padding: 8px 0;
-  color: #2F3676;
+  color: ${({isPink}) => isPink ? '#E56E74' : '#2F3676'};
 `;
 
 const Data = styled.p`
