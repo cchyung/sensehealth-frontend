@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Row, Column } from "./";
+import { Column } from "./";
 
 import FeelingWellChart from "../assets/graphs/feeling_well_chart.svg";
 
