@@ -4,6 +4,7 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: ${({justify}) => justify ? justify : 'auto'};
+  align-items: ${({align}) => align ? align : 'auto'};
 `;
 
 const Column = styled.div`
