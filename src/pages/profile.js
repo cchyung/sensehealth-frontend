@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import { Menu, Main, Container, Card, Column, Row, TriCol, Graph } from '../components';
+import  { useLocation, useHistory } from 'react-router-dom';
+
+import { Menu, Main, Container, Card, Column, Row, QuadCol, Graph } from '../components';
 import Graphs from '../assets/graphs/graphs.png';
 import Graphs2 from '../assets/graphs/graphs2.png';
 import ProfPic from '../assets/profpic.png';
+
+import useApi from "../hooks/useApi";
 
 let profile_data = {
   name: "Peter Parker"
@@ -12,6 +16,37 @@ let profile_data = {
 }
 
 function Profile() {
+  const { state } = useLocation();
+  const history = useHistory();
+
+  if (state === undefined || state.userId === undefined || state.userId === 'mock') {
+    history.push("/");
+  }
+
+  const [userData, loading] = useApi("/fetch_user_data", "POST", {
+    "user_id": state.userId,
+    "start_time": -1,
+    "sensors": ["ecg_sensor"]
+  });
+
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    if (userData) {
+      console.log(userData);
+
+      const ecgSensor = userData.ecg_sensor;
+      const keys = Object.keys(ecgSensor);
+      const pls = userData.ecg_sensor[keys[0]];
+
+      setData({
+        temperature: pls.temp,
+        oxygen: pls.pulse_oximeter * 100,
+        heartRate: pls.HR
+      })
+    }
+  }, [userData]);
+
   return (
     <>
       <Menu />
@@ -24,18 +59,44 @@ function Profile() {
               <IdCard>
                 <img src={ProfPic}/>
                 <IdContent>
-                  <h1>Peter Parker</h1>
-                  <em>Doctor</em>
-                  <p><b>Birthday:</b> 1/23/89</p>
-                  <p><b>Email:</b> spiderman@hospital.net</p>
+                  <h1>{state.name}</h1>
+                  <em>{state.role}</em>
+                  <p><b>Birthday:</b> 4/18/90</p>
+                  <p><b>Email:</b> {state.userId}@hospital.org</p>
                 </IdContent>
               </IdCard>
               <TagList>
                 <Tag>Third Floor</Tag>
                 <Tag>Symbiote Research</Tag>
               </TagList>
+              <Card title="Current Health Signals">
+                {!loading && userData && data && <QuadCol
+                    data={[
+                      {
+                        value: data.temperature.toFixed(1),
+                        label: 'Temperature'
+                      },
+                      {
+                        value: data.heartRate.toFixed(1),
+                        label: 'Heart Rate'
+                      },
+                      {
+                        value: data.oxygen.toFixed(1),
+                        label: 'Oxygen'
+                      },
+                      {
+                        value: state.checkIn,
+                        label: 'Check In'
+                      }
+                    ]}
+                  />}
+
+                  {
+                    loading && <Loading>Loading</Loading>
+                  }
+              </Card>
               <Card title="Self Assessments">
-              <GraphContainer>
+                <GraphContainer>
                   <img src={Graphs2}></img>
                 </GraphContainer>
               </Card>
@@ -149,5 +210,11 @@ const TabList = styled.ul`
   }
   
 `
+
+const Loading = styled.h2`
+  color: #B6BAEE;
+  text-align: center;
+  font-size: 18px;
+`;
 
 export default Profile;

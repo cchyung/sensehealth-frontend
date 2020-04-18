@@ -49,7 +49,7 @@ function useApi(route, method, body) {
     }
 
     getData();
-  }, [url, body, method]);
+  }, [url, method]);
 
   return [result, loading, error];
 }
