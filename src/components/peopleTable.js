@@ -7,7 +7,10 @@ function generateRows(people, handleClick) {
     const alert = person.temperature > 100 || person.avgHeartRate > 100 || person.oxygen <= 92 || person.checkIn < 4;
 
     return (
-      <PeopleRow onClick={handleClick}>
+      <PeopleRow onClick={() => {
+        handleClick(person);
+        window.scrollTo(0,0);
+      }}>
         <PeopleRowCell alert={alert}>
           <VertIndicator alert={alert} />
           <Big>{person.name}</Big>
@@ -39,8 +42,8 @@ function generateRows(people, handleClick) {
 function PeopleTable({ people }) {
     const history = useHistory();
 
-    const PeopleRows = generateRows(people, () => {
-      history.push("/profile");
+    const PeopleRows = generateRows(people, (data) => {
+      history.push("/profile", data);
     })
   
     return (

@@ -9,6 +9,7 @@ function Groups() {
   const mockData = [
     {
       name: 'Peter Parker',
+      userId: 'mock',
       role: 'Doctor',
       temperature: 101.2,
       avgHeartRate: 112,
@@ -17,6 +18,7 @@ function Groups() {
     },
     {
       name: 'Gwen Stacy',
+      userId: 'mock',
       role: 'ICU Nurse',
       temperature: 102.6,
       avgHeartRate: 90,
@@ -25,6 +27,7 @@ function Groups() {
     },
     {
       name: 'Mary Jane',
+      userId: 'mock',
       role: 'Head RN',
       temperature: 98.6,
       avgHeartRate: 115,
@@ -33,6 +36,7 @@ function Groups() {
     },
     {
       name: 'Harry Osborn',
+      userId: 'mock',
       role: 'Pre-Op Nurse',
       temperature: 98.9,
       avgHeartRate: 90,
@@ -41,6 +45,7 @@ function Groups() {
     },
     {
       name: 'Miles Morales',
+      userId: 'mock',
       role: 'Pre-Op Nurse',
       temperature: 98.9,
       avgHeartRate: 90,
@@ -51,7 +56,7 @@ function Groups() {
 
   const [data, setData] = useState([]);
 
-  const [groupData, loading] = useApi("https://sensehealth-backend.herokuapp.com/get_group_overview ", "POST", {
+  const [groupData, loading] = useApi("/get_group_overview ", "POST", {
     "group_id": "-M5BNkHSfgzeFycxm9F1"
   });
 
@@ -75,6 +80,7 @@ function Groups() {
         }
         newUsers.push({
           name: name(userId),
+          userId: userId,
           role: "Nurse",
           temperature: user.ecg_sensor.av_temp.toFixed(1),
           avgHeartRate: user.ecg_sensor.av_HR.toFixed(1),
