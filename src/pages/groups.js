@@ -70,7 +70,7 @@ function Groups() {
           role: "Nurse",
           temperature: user.ecg_sensor.av_temp.toFixed(1),
           avgHeartRate: user.ecg_sensor.av_HR.toFixed(1),
-          oxygen: user.ecg_sensor.av_ox.toFixed(1),
+          oxygen: (user.ecg_sensor.av_ox*100).toFixed(1),
           checkIn: 4
         })
       });
