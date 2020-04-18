@@ -7,3 +7,4 @@ export { Row, Column } from "./grid";
 export { default as TriCol }  from "./triCol";
 export { default as PeopleTable } from "./peopleTable";
 export { default as Summary } from "./summary";
+export { default as Graph } from "./graph";
