@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import  { useHistory } from 'react-router-dom';
 
-function generateRows(people) {
+function generateRows(people, handleClick) {
   return people.map(person => {
     const alert = person.temperature > 100 || person.avgHeartRate > 100 || person.oxygen <= 92 || person.checkIn < 4;
 
     return (
-      <PeopleRow>
+      <PeopleRow onClick={handleClick}>
         <PeopleRowCell alert={alert}>
           <VertIndicator alert={alert} />
           <Big>{person.name}</Big>
@@ -36,7 +37,12 @@ function generateRows(people) {
 }
 
 function PeopleTable({ people }) {
-    const PeopleRows = generateRows(people)
+    const history = useHistory();
+
+    const PeopleRows = generateRows(people, () => {
+      history.push("/profile");
+    })
+  
     return (
         <Table>
           <TableHeaderRow>

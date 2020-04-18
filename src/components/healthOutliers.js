@@ -7,23 +7,38 @@ const HealthOutliers = () => (
   <>
     <OutlierList>
       <ListItem>
-        <Name>Wilhelm Willie</Name>
+        <Name>Adithya B.</Name>
         <Group>Third Floor</Group>
       </ListItem>
 
       <ListItem>
-        <Name>Anthony Durant</Name>
-        <Group>Second Floor</Group>
-      </ListItem>
-
-      <ListItem>
-        <Name>Kevin James</Name>
-        <Group>First Floor</Group>
-      </ListItem>
-
-      <ListItem>
-        <Name>LeBron Davis</Name>
+        <Name>Gavin B.</Name>
         <Group>Third Floor</Group>
+      </ListItem>
+
+      <ListItem>
+        <Name>Peter Parker</Name>
+        <Group>Third Floor</Group>
+      </ListItem>
+
+      <ListItem>
+        <Name>Mary Jane</Name>
+        <Group>Third Floor</Group>
+      </ListItem>
+
+      <ListItem>
+        <Name>Gwen Stacy</Name>
+        <Group>Third Floor</Group>
+      </ListItem>
+
+      <ListItem>
+        <Name>Barry Allen</Name>
+        <Group>Urgent Care</Group>
+      </ListItem>
+
+      <ListItem>
+        <Name>Iris West</Name>
+        <Group>Urgent Care</Group>
       </ListItem>
     </OutlierList>
 
@@ -39,9 +54,14 @@ const ListItem = styled(Row)`
   justify-content: space-between;
   padding: 18px 24px;
   border-top: 5px solid #EBEFF2;
+  cursor: pointer;
 
   &:last-child {
     border-bottom: 5px solid #EBEFF2;
+  }
+
+  &:hover {
+    background: #EBEFF2;
   }
 `;
 

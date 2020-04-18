@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Menu, Main, Container, Row, Column, Search, PeopleTable, Summary } from '../components';
+
+import useApi from "../hooks/useApi";
 
 function Groups() {
   const mockData = [
@@ -47,6 +49,39 @@ function Groups() {
     },
   ];
 
+  const [data, setData] = useState([]);
+
+  const [groupData, loading] = useApi("/get_group_overview", "POST", {
+    "group_id": "-M5AzMUXQMdGMTwOnvdP"
+  });
+
+  useEffect(() => {
+    if (groupData) {
+      const userOverviews = groupData.user_overviews;
+      const newUsers =  [];
+
+      const userIds = Object.keys(userOverviews)
+
+      userIds.forEach(userId => {
+        const user = userOverviews[userId];
+
+        newUsers.push({
+          name: userId === 'adib' ? "Adithya B." : "Gavin B.",
+          role: "Nurse",
+          temperature: user.ecg_sensor.av_temp.toFixed(1),
+          avgHeartRate: user.ecg_sensor.av_HR.toFixed(1),
+          oxygen: user.ecg_sensor.av_ox.toFixed(1),
+          checkIn: 4
+        })
+      });
+
+      setData([
+        ...newUsers,
+        ...mockData
+      ])
+    }
+  }, [groupData])
+
   return (
     <>
       <Menu />
@@ -62,9 +97,17 @@ function Groups() {
             <Column><Button>+ Add Member</Button></Column>
           </InfoBar>
 
-          <Summary people={mockData} />
-
-          <PeopleTable people={mockData} />
+          {
+            loading ? (
+              <Loading>Loading...</Loading>
+            ) : (
+              <>
+                <Summary people={data} />
+                <PeopleTable people={data} />
+              </>
+            )
+          }
+          
         </Container>
       </Main>
     </>
@@ -110,6 +153,14 @@ const Button = styled.button`
   font-weight: 600;
   font-size: 13px;
   cursor: pointer;
+`;
+
+const Loading = styled.h2`
+  color: #B6BAEE;
+  text-align: center;
+  font-size: 32px;
+  margin-top: 64px;
+  font-size: 48px;
 `;
 
 export default Groups;

@@ -1,18 +1,30 @@
 import React from "react";
 import styled from "styled-components";
 
-const YourGroups = () => (
-  <>
-    <GroupGrid>
-      <Group>Third Floor</Group>
-      <Group atRisk>Executive Mgmt. <Badge>3</Badge></Group>
-      <Group>Second Floor</Group>
-      <Group>Intensive Care</Group>
-    </GroupGrid>
+import  { useHistory } from 'react-router-dom';
 
-    <See>See all groups »</See>
-  </>
-);
+const YourGroups = () => {
+  const history = useHistory();
+
+  const gotoGroup = () => {
+    history.push("/groups");
+  }
+
+  return (
+    <>
+      <GroupGrid>
+        <Group onClick={gotoGroup} atRisk>Third Floor <Badge>5</Badge></Group>
+        <Group onClick={gotoGroup}>Executive Mgmt.</Group>
+        <Group onClick={gotoGroup}>Second Floor</Group>
+        <Group onClick={gotoGroup} atRisk>Intensive Care <Badge>2</Badge></Group>
+        <Group onClick={gotoGroup} atRisk>Urgent Care <Badge>4</Badge></Group>
+        <Group onClick={gotoGroup}>First Floor</Group>
+      </GroupGrid>
+
+      <See>See all groups »</See>
+    </>
+  );
+}
 
 const GroupGrid = styled.div`
   display: grid;
