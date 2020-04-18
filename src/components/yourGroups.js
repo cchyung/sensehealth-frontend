@@ -13,7 +13,7 @@ const YourGroups = () => {
   return (
     <>
       <GroupGrid>
-        <Group onClick={gotoGroup} atRisk>Third Floor <Badge>5</Badge></Group>
+        <Group onClick={gotoGroup} atRisk>Third Floor <Badge>4</Badge></Group>
         <Group onClick={gotoGroup}>Executive Mgmt.</Group>
         <Group onClick={gotoGroup}>Second Floor</Group>
         <Group onClick={gotoGroup} atRisk>Intensive Care <Badge>2</Badge></Group>

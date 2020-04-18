@@ -7,16 +7,6 @@ const HealthOutliers = () => (
   <>
     <OutlierList>
       <ListItem>
-        <Name>Adithya B.</Name>
-        <Group>Third Floor</Group>
-      </ListItem>
-
-      <ListItem>
-        <Name>Gavin B.</Name>
-        <Group>Third Floor</Group>
-      </ListItem>
-
-      <ListItem>
         <Name>Peter Parker</Name>
         <Group>Third Floor</Group>
       </ListItem>
@@ -39,6 +29,21 @@ const HealthOutliers = () => (
       <ListItem>
         <Name>Iris West</Name>
         <Group>Urgent Care</Group>
+      </ListItem>
+
+      <ListItem>
+        <Name>Lois Lane</Name>
+        <Group>Urgent Care</Group>
+      </ListItem>
+
+      <ListItem>
+        <Name>Martha Kent</Name>
+        <Group>Intensive</Group>
+      </ListItem>
+
+      <ListItem>
+        <Name>Clark Kent</Name>
+        <Group>Intensive</Group>
       </ListItem>
     </OutlierList>
 

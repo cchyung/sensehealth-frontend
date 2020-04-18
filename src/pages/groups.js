@@ -12,8 +12,8 @@ function Groups() {
       role: 'Doctor',
       temperature: 101.2,
       avgHeartRate: 112,
-      oxygen: 94,
-      checkIn: 2.6,
+      oxygen: 95,
+      checkIn: 2.3,
     },
     {
       name: 'Gwen Stacy',
@@ -51,8 +51,8 @@ function Groups() {
 
   const [data, setData] = useState([]);
 
-  const [groupData, loading] = useApi("/get_group_overview", "POST", {
-    "group_id": "-M5AzMUXQMdGMTwOnvdP"
+  const [groupData, loading] = useApi("https://sensehealth-backend.herokuapp.com/get_group_overview ", "POST", {
+    "group_id": "-M5BNkHSfgzeFycxm9F1"
   });
 
   useEffect(() => {
@@ -65,8 +65,16 @@ function Groups() {
       userIds.forEach(userId => {
         const user = userOverviews[userId];
 
+        const name = (userId) => {
+          if (userId === 'adib') return 'Adithya Bellathur';
+          if (userId === 'zsullens') return 'Zach Sullens';
+          if (userId === 'jwong') return 'Janeline Wong';
+          if (userId === 'gbains') return 'Gavin Bains';
+          if (userId === 'cchyung') return 'Conner Chyung';
+          if (userId === 'wwillie') return 'Wilhelm Willie';
+        }
         newUsers.push({
-          name: userId === 'adib' ? "Adithya B." : "Gavin B.",
+          name: name(userId),
           role: "Nurse",
           temperature: user.ecg_sensor.av_temp.toFixed(1),
           avgHeartRate: user.ecg_sensor.av_HR.toFixed(1),
@@ -75,10 +83,19 @@ function Groups() {
         })
       });
 
-      setData([
+      const combinedData = [
         ...newUsers,
         ...mockData
-      ])
+      ]
+
+      combinedData.sort((a, b) => {
+        const aRisk = a.temperature > 100 || a.avgHeartRate > 100 || a.oxygen <= 92 || a.checkIn < 4;
+        const bRisk = b.temperature > 100 || b.avgHeartRate > 100 || b.oxygen <= 92 || b.checkIn < 4;
+
+        return bRisk - aRisk;
+      })
+
+      setData(combinedData)
     }
   }, [groupData])
 
