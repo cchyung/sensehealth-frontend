@@ -78,6 +78,16 @@ function Groups() {
           if (userId === 'cchyung') return 'Conner Chyung';
           if (userId === 'wwillie') return 'Wilhelm Willie';
         }
+
+        const cI = (userId) => {
+          if (userId === 'adib') return 4.2;
+          if (userId === 'zsullens') return 2.3;
+          if (userId === 'jwong') return 4.8;
+          if (userId === 'gbains') return 4.2;
+          if (userId === 'cchyung') return 4.1;
+          if (userId === 'wwillie') return 3.9;
+        }
+
         newUsers.push({
           name: name(userId),
           userId: userId,
@@ -85,18 +95,21 @@ function Groups() {
           temperature: user.ecg_sensor.av_temp.toFixed(1),
           avgHeartRate: user.ecg_sensor.av_HR.toFixed(1),
           oxygen: (user.ecg_sensor.av_ox*100).toFixed(1),
-          checkIn: 4
+          checkIn: cI(userId),
         })
       });
 
       const combinedData = [
-        ...newUsers,
-        ...mockData
+        ...newUsers
       ]
 
       combinedData.sort((a, b) => {
         const aRisk = a.temperature > 100 || a.avgHeartRate > 100 || a.oxygen <= 92 || a.checkIn < 4;
         const bRisk = b.temperature > 100 || b.avgHeartRate > 100 || b.oxygen <= 92 || b.checkIn < 4;
+
+        if (aRisk === bRisk) {
+          return a.checkIn - b.checkIn;
+        }
 
         return bRisk - aRisk;
       })
@@ -115,7 +128,7 @@ function Groups() {
         <Container>
           <InfoBar justify="space-between" align="center">
             <Column width="25%"><span>Group: <Blue>Third Floor - Nurse Unit</Blue></span></Column>
-            <Column><span>Range: <Fade>Yr</Fade> <Fade>3 Mo</Fade> <Fade>Mo</Fade> <Fade>Wk</Fade> <Blue>Today</Blue></span></Column>
+            <Column><span>Range: <Fade>Yr</Fade> <Fade>3 Mo</Fade> <Fade>Mo</Fade> <Blue>Wk</Blue> <Fade>Today</Fade></span></Column>
             <Column><span>Sort By: <Blue>Risk Level</Blue></span></Column>
             <Column><Button>+ Add Member</Button></Column>
           </InfoBar>
