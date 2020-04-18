@@ -8,3 +8,6 @@ export { default as TriCol }  from "./triCol";
 export { default as PeopleTable } from "./peopleTable";
 export { default as Summary } from "./summary";
 export { default as Graph } from "./graph";
+export { default as HealthOutliers } from "./healthOutliers";
+export { default as YourGroups } from "./yourGroups";
+export { default as TeamFeelingChart } from "./teamFeelingChart";
