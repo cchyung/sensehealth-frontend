@@ -3,26 +3,32 @@ import styled from 'styled-components';
 
 function generateRows(people) {
   return people.map(person => {
-    const alert = person.temperature > 100 || person.avgHeartRate > 100 || person.oxygen <= 92;
+    const alert = person.temperature > 100 || person.avgHeartRate > 100 || person.oxygen <= 92 || person.checkIn < 4;
 
     return (
       <PeopleRow>
         <PeopleRowCell alert={alert}>
           <VertIndicator alert={alert} />
-          <Name>{person.name}</Name>
+          <Big>{person.name}</Big>
         </PeopleRowCell>
-        <PeopleRowCell>{person.role}</PeopleRowCell>
+        <PeopleRowCell>
+          <Big noBold>{person.role}</Big>
+        </PeopleRowCell>
         <PeopleRowCell alert={person.temperature > 100}>
-          <Number>{person.temperature}</Number> degrees
-          <HorzIndicator alert={alert} />
+          <Big>{person.temperature}</Big> degrees
+          <HorzIndicator alert={person.temperature > 100} />
         </PeopleRowCell>
         <PeopleRowCell alert={person.avgHeartRate > 100}>
-          <Number>{person.avgHeartRate}</Number> bpm
-          <HorzIndicator alert={alert} />
+          <Big>{person.avgHeartRate}</Big> bpm
+          <HorzIndicator alert={person.avgHeartRate > 100} />
         </PeopleRowCell>
         <PeopleRowCell alert={person.oxygen <= 92}>
-          <Number>{person.oxygen}</Number> percent
-          <HorzIndicator alert={alert} />
+          <Big>{person.oxygen}</Big> percent
+          <HorzIndicator alert={person.oxygen <= 92} />
+        </PeopleRowCell>
+        <PeopleRowCell alert={person.checkIn < 4}>
+          <Big>{person.checkIn}</Big> /5
+          <HorzIndicator alert={person.checkIn < 4} />
         </PeopleRowCell>
       </PeopleRow>
     );
@@ -34,11 +40,12 @@ function PeopleTable({ people }) {
     return (
         <Table>
           <TableHeaderRow>
-            <th width="25%">Name</th>
-            <th width="18.75%">Role</th>
-            <th width="18.75%">Temperature</th>
-            <th width="18.75">Avg. Heart Rate</th>
-            <th width="18.75%">Oxygen</th>
+            <th width="20%">Name</th>
+            <th width="16%">Role</th>
+            <th width="16%">Temp. <Small>Avg.</Small></th>
+            <th width="16">Heart Rate <Small>Avg.</Small></th>
+            <th width="16%">Oxygen <Small>Avg.</Small></th>
+            <th width="16%">Check In <Small>Avg.</Small></th>
           </TableHeaderRow>
           
           {PeopleRows}
@@ -72,6 +79,7 @@ const PeopleRow = styled.tr`
     padding: 16px;
     background: #FFFFFF;
     border-bottom: 3px solid #EBEFF2;
+    cursor: pointer;
   }
 
   &:last-child {
@@ -79,20 +87,29 @@ const PeopleRow = styled.tr`
       border-bottom: 16px solid #EBEFF2;
     }
   }
+
+  &:hover {
+    td {
+      background-color: #EBEFF2;
+    }
+  }
 `;
 
 const PeopleRowCell = styled.td`
   position: relative;
   color: #6A707E;
-  ${({alert}) => alert && 'color: #FF103B;'}
+  ${({alert}) => alert && 'color: #E56E74;'}
+  font-size: 12px;
 `;
 
-const Name = styled.span`
-  font-weight: 700;
+const Small = styled.span`
+  font-size: 12px;
+  text-transform: uppercase;
 `;
 
-const Number = styled.span`
-  font-weight: 700;
+const Big = styled.span`
+  font-weight: ${({noBold}) => noBold ? `400` : `700`};
+  font-size: 16px;
 `;
 
 const VertIndicator = styled.div`
