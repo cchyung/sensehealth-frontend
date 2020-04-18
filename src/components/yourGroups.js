@@ -14,11 +14,11 @@ const YourGroups = () => {
     <>
       <GroupGrid>
         <Group onClick={gotoGroup} atRisk>Third Floor <Badge>2</Badge></Group>
-        <Group onClick={gotoGroup}>Executive Mgmt.</Group>
-        <Group onClick={gotoGroup}>Second Floor</Group>
-        <Group onClick={gotoGroup} atRisk>Intensive Care <Badge>2</Badge></Group>
-        <Group onClick={gotoGroup} atRisk>Urgent Care <Badge>4</Badge></Group>
-        <Group onClick={gotoGroup}>First Floor</Group>
+        <Group>Executive Mgmt.</Group>
+        <Group>Second Floor</Group>
+        <Group atRisk>Intensive Care <Badge>2</Badge></Group>
+        <Group atRisk>Urgent Care <Badge>4</Badge></Group>
+        <Group>First Floor</Group>
       </GroupGrid>
 
       <See>See all groups »</See>
