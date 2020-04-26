@@ -34,7 +34,9 @@ function Profile() {
 
       const ecgSensor = userData.ecg_sensor;
       const keys = Object.keys(ecgSensor);
-      const pls = userData.ecg_sensor[keys[keys.length - 1]];
+      let truncatedKeys = keys.slice(keys.length - 25, keys.length - 1);
+
+      const pls = userData.ecg_sensor[truncatedKeys[truncatedKeys.length - 1]];
 
       setData({
         temperature: pls.temp,
@@ -46,8 +48,6 @@ function Profile() {
       const newHeartrateSeries = [];
       const newOxygenSeries = [];
 
-      let truncatedKeys = keys.slice(keys.length - 25, keys.length - 1);
-
       truncatedKeys.forEach(key => {
         const d = userData.ecg_sensor[key];
 
@@ -56,12 +56,12 @@ function Profile() {
           x: key,
         });
 
-        newHeartrateSeries.push({
+        newOxygenSeries.push({
           data: d.pulse_oximeter * 100,
           x: key,
         });
 
-        newOxygenSeries.push({
+        newHeartrateSeries.push({
           data: d.HR,
           x: key,
         });
