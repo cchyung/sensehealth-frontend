@@ -17,7 +17,7 @@ import { useState, useEffect } from 'react';
 */
 function useApi(route, method, body) {
   // Prefix route with production host
-  const url = (process.env.NODE_ENV === "production") ? "https://sensehealth-backend.herokuapp.com" + route : route;
+  const url = "https://sensehealth-backend.herokuapp.com" + route;
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

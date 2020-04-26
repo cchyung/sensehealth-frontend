@@ -12,3 +12,4 @@ export { default as HealthOutliers } from "./healthOutliers";
 export { default as YourGroups } from "./yourGroups";
 export { default as TeamFeelingChart } from "./teamFeelingChart";
 export { default as QuadCol } from "./quadCol";
+export { default as LineChart } from "./lineChart";

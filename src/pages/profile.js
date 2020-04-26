@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import  { useLocation, useHistory } from 'react-router-dom';
+import  { NavLink, useLocation, useHistory } from 'react-router-dom';
 
-import { Menu, Main, Container, Card, Column, Row, QuadCol, Graph } from '../components';
-import Graphs from '../assets/graphs/graphs.png';
+import { Menu, Main, Container, Card, Column, Row, QuadCol, LineChart } from '../components';
 import Graphs2 from '../assets/graphs/graphs2.png';
 import ProfPic from '../assets/profpic.png';
 
 import useApi from "../hooks/useApi";
-
-let profile_data = {
-  name: "Peter Parker"
-  
-}
 
 function Profile() {
   const { state } = useLocation();
@@ -25,11 +19,14 @@ function Profile() {
 
   const [userData, loading] = useApi("/fetch_user_data", "POST", {
     "user_id": state.userId,
-    "start_time": -1,
+    "start_time": 0,
     "sensors": ["ecg_sensor"]
   });
 
   const [data, setData] = useState(null);
+  const [temperatureSeries, setTemperatureSeries] = useState([]);
+  const [heartrateSeries, setHeartrateSeries] = useState([]);
+  const [oxygenSeries, setOxygenSeries] = useState([]);
 
   useEffect(() => {
     if (userData) {
@@ -37,13 +34,42 @@ function Profile() {
 
       const ecgSensor = userData.ecg_sensor;
       const keys = Object.keys(ecgSensor);
-      const pls = userData.ecg_sensor[keys[0]];
+      const pls = userData.ecg_sensor[keys[keys.length - 1]];
 
       setData({
         temperature: pls.temp,
         oxygen: pls.pulse_oximeter * 100,
         heartRate: pls.HR
       })
+
+      const newTemperatureSeries = [];
+      const newHeartrateSeries = [];
+      const newOxygenSeries = [];
+
+      let truncatedKeys = keys.slice(keys.length - 25, keys.length - 1);
+
+      truncatedKeys.forEach(key => {
+        const d = userData.ecg_sensor[key];
+
+        newTemperatureSeries.push({
+          data: d.temp,
+          x: key,
+        });
+
+        newHeartrateSeries.push({
+          data: d.pulse_oximeter * 100,
+          x: key,
+        });
+
+        newOxygenSeries.push({
+          data: d.HR,
+          x: key,
+        });
+      });
+
+      setTemperatureSeries(newTemperatureSeries);
+      setHeartrateSeries(newHeartrateSeries);
+      setOxygenSeries(newOxygenSeries);
     }
   }, [userData]);
 
@@ -57,7 +83,6 @@ function Profile() {
           <Row justify="space-between">
             <Column width="50%">
               <IdCard>
-                <img src={ProfPic}/>
                 <IdContent>
                   <h1>{state.name}</h1>
                   <em>{state.role}</em>
@@ -66,7 +91,7 @@ function Profile() {
                 </IdContent>
               </IdCard>
               <TagList>
-                <Tag>Third Floor</Tag>
+                <NavLink to="/groups"><Tag>Third Floor</Tag></NavLink>
                 <Tag>Symbiote Research</Tag>
               </TagList>
               <Card title="Current Health Signals">
@@ -103,16 +128,9 @@ function Profile() {
             </Column>
             <Column width="45%">
               <Card title="Health Dashboard">
-                <TabList>
-                  <li>Year</li>
-                  <li>3 Months</li>
-                  <li>Month</li>
-                  <li>Week</li>
-                  <li className='active'>Today</li>
-                </TabList>
-                <GraphContainer>
-                  <img src={Graphs}></img>
-                </GraphContainer>
+                <LineChart data={temperatureSeries} title="Temperature" />
+                <LineChart data={heartrateSeries} title="Heart Rate" />
+                <LineChart data={oxygenSeries} title="Oxygen Levels" />
               </Card>
             </Column>
           </Row>          
@@ -147,7 +165,6 @@ const IdCard = styled.div `
 `
 
 const IdContent = styled.div`
-  margin-left: 50px;
   h1 {
     font-family: Helvetica Neue;
     font-style: normal;

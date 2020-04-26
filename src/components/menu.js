@@ -13,8 +13,6 @@ function Menu() {
             <SquareLogo src={SquareLogoSVG} alt='Harbor Health Logo'/>
             <Nav>
                 <NavItem active={pathname === '/dashboard'}><NavLink to='/dashboard'>Dashboard</NavLink></NavItem>
-                <NavItem active={pathname === '/groups'}><NavLink to='/groups'>Groups</NavLink></NavItem>
-                <NavItem active={pathname === '/profile'}><NavLink to='/profile'>Profile</NavLink></NavItem>
                 <NavItem active={pathname === '/settings'}><NavLink to='#'>Settings</NavLink></NavItem>
             </Nav>
             <BottomLogo src={TextLogoSVG} alt='Harbor Health' />
