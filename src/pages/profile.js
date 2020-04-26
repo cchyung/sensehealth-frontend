@@ -3,9 +3,7 @@ import styled from 'styled-components';
 
 import  { NavLink, useLocation, useHistory } from 'react-router-dom';
 
-import { Menu, Main, Container, Card, Column, Row, QuadCol, LineChart } from '../components';
-import Graphs2 from '../assets/graphs/graphs2.png';
-import ProfPic from '../assets/profpic.png';
+import { Menu, Main, Container, Card, Column, Row, QuadCol, LineChart, CheckInData } from '../components';
 
 import useApi from "../hooks/useApi";
 
@@ -24,9 +22,9 @@ function Profile() {
   });
 
   const [data, setData] = useState(null);
-  const [temperatureSeries, setTemperatureSeries] = useState([]);
-  const [heartrateSeries, setHeartrateSeries] = useState([]);
-  const [oxygenSeries, setOxygenSeries] = useState([]);
+  const [temperatureSeries, setTemperatureSeries] = useState(null);
+  const [heartrateSeries, setHeartrateSeries] = useState(null);
+  const [oxygenSeries, setOxygenSeries] = useState(null);
 
   useEffect(() => {
     if (userData) {
@@ -92,7 +90,6 @@ function Profile() {
               </IdCard>
               <TagList>
                 <NavLink to="/groups"><Tag>Third Floor</Tag></NavLink>
-                <Tag>Symbiote Research</Tag>
               </TagList>
               <Card title="Current Health Signals">
                 {!loading && userData && data && <QuadCol
@@ -122,15 +119,15 @@ function Profile() {
               </Card>
               <Card title="Self Assessments">
                 <GraphContainer>
-                  <img src={Graphs2}></img>
+                  <CheckInData title="Check in data (last 10 check-ins)" userId={state.userId} />
                 </GraphContainer>
               </Card>
             </Column>
             <Column width="45%">
-              <Card title="Health Dashboard">
-                <LineChart data={temperatureSeries} title="Temperature" />
-                <LineChart data={heartrateSeries} title="Heart Rate" />
-                <LineChart data={oxygenSeries} title="Oxygen Levels" />
+              <Card title="Health Status Charts">
+                <LineChart data={temperatureSeries} title="Temperature" isAlert={temperatureSeries && temperatureSeries[temperatureSeries.length-1].data > 100} />
+                <LineChart data={heartrateSeries} title="Heart Rate" isAlert={heartrateSeries && heartrateSeries[heartrateSeries.length-1].data > 100} />
+                <LineChart data={oxygenSeries} title="Oxygen Levels" isAlert={oxygenSeries && oxygenSeries[oxygenSeries.length-1].data <= 92} />
               </Card>
             </Column>
           </Row>          
