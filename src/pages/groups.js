@@ -127,10 +127,7 @@ function Groups() {
 
         <Container>
           <InfoBar justify="space-between" align="center">
-            <Column width="25%"><span>Group: <Blue>Third Floor - Nurse Unit</Blue></span></Column>
-            <Column><span>Range: <Fade>Yr</Fade> <Fade>3 Mo</Fade> <Fade>Mo</Fade> <Blue>Wk</Blue> <Fade>Today</Fade></span></Column>
-            <Column><span>Sort By: <Blue>Risk Level</Blue></span></Column>
-            <Column><Button>+ Add Member</Button></Column>
+            <Column width="100%"><span>Group: <Blue>Third Floor - Nurse Unit</Blue></span></Column>
           </InfoBar>
 
           {
