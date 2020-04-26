@@ -25,7 +25,14 @@ const CheckInData = ({ title, isAlert, userId }) => {
 
   const chartData = useMemo(() => {
     if (data) {
-      const count = {};
+      const count = {
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0,
+      };
+      
       const keys = Object.keys(data);
 
       keys.slice(keys.length - 10, keys.length - 1).forEach(key => {
